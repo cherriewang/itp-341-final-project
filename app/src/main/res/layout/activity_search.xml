@@ -31,13 +31,13 @@
             android:text="Search by state"
             android:textColor="@color/colorGrey"
             android:ems="10"
-            android:id="@+id/editText" />
+            android:id="@+id/editTextSearch" />
 
         <Button
             android:text="@string/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:id="@+id/button" />
+            android:id="@+id/buttonSearch" />
     </LinearLayout>
 </RelativeLayout>
