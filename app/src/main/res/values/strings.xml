@@ -8,4 +8,42 @@
     <string name="search">Search</string>
     <string name="goSearch">Go To Search</string>
 
-</resources>
+    <string name="action_settings">Settings</string>
+    <string name="WHOISMYREP_TXT">Who is my Representative?</string>
+    <string name="STATESENT_BTN">State Senators</string>
+    <string name="STATEREPS_BTN">State Representatives</string>
+    <string name="title_activity_reps">Reps</string>
+    <string name="title_activity_sens">Sens</string>
+    <string name="helloreps">Reps</string>
+    <string name="hellosens">Sens</string>
+    <string name="repstitle_txt">Representatives</string>
+    <string name="REPSTITLE_TXT">Representatives</string>
+    <string name="SENSTITLE_TXT">Senators</string>
+    <string name="ziptitle_txt">Search by zip</string>
+    <string name="ok_btn">OK</string>
+    <string name="search_btn">Search</string>
+    <string name="byname_txt">Search by name</string>
+    <string name="bystate_txt">Search by state</string>
+    <string name="statehint_et">Enter two letter state code</string>
+    <string name="namehint_et">Enter representative name</string>
+    <string name="sennamehint_et">Enter Senator name</string>
+    <string name="ziphint_et">Enter five digit zip code</string>
+    <string name="title_activity_results">Results</string>
+    <string name="ZIPMESSAGE_TOAST">Please enter a 5 digit zip code</string>
+    <string name="zipstring_log">"zipcode: "</string>
+    <string name="NETERR_TOAST">Please check network connectivity</string>
+    <string name="REPBYZIP_URL"><![CDATA[http://whoismyrepresentative.com/getall_mems.php?output=json&zip=]]></string>
+    <string name="HTTPGET">GET</string>
+    <string name="RESPONSE_LOG">"The response is: "</string>
+    <string name="REPBYNAME_URL"><![CDATA[" http://whoismyrepresentative.com/getall_reps_byname.php?output=json&name="]]></string>
+    <string name="REPBYSTATE_URL"><![CDATA[http://whoismyrepresentative.com/getall_reps_bystate.php?output=json&state=]]></string>
+    <string name="REPNAME_LOG">"Representative name: "</string>
+    <string name="REPSTATE_LOG">"Representative's state: "</string>
+    <string name="JSONERR_LOG">error parsing json</string>
+    <string name="DATAERR_TOAST">No Data Found</string>
+    <string name="RESULT_STR">results</string>
+    <string name="RESULT_TV">Your Results</string>
+    <string name="SENBYNAME_TXT">Search by name</string>
+    <string name="SENBYSTATE_TXT">Search by state</string>
+    <string name="SENNAME_URL"><![CDATA[http://whoismyrepresentative.com/getall_sens_byname.php?output=json&name=]]></string>
+    <string name="SENSTATE_URL"><![CDATA[http://whoismyrepresentative.com/getall_sens_bystate.php?output=json&state=]]></string>

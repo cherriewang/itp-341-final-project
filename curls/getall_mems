@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -G -H "Accept: application.json"  http://whoismyrepresentative.com/getall_sens_bystate.php?state=ME&output=json

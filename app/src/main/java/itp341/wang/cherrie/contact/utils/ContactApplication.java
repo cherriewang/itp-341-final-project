@@ -1,4 +1,4 @@
-package itp341.wang.cherrie.contact;
+package itp341.wang.cherrie.contact.utils;
 
 /**
  * Created by Cherrie on 12/10/16.

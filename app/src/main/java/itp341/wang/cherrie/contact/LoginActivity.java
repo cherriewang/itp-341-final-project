@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import itp341.wang.cherrie.contact.model.User;
+import itp341.wang.cherrie.contact.utils.ContactApplication;
+import itp341.wang.cherrie.contact.utils.Debug;
 
 public class LoginActivity extends AppCompatActivity {
 

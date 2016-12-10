@@ -1,6 +1,5 @@
 package itp341.wang.cherrie.contact;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,10 +15,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import itp341.wang.cherrie.contact.model.User;
+import itp341.wang.cherrie.contact.utils.ContactApplication;
+import itp341.wang.cherrie.contact.utils.Debug;
 
 public class SignupActivity extends AppCompatActivity {
     private Button enterButton;

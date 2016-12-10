@@ -1,4 +1,4 @@
-package itp341.wang.cherrie.contact;
+package itp341.wang.cherrie.contact.utils;
 
 import android.content.Context;
 import android.widget.Toast;

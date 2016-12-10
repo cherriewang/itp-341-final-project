@@ -1,5 +1,8 @@
 package itp341.wang.cherrie.contact;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.io.IOException;
 import java.net.URL;
+
+import itp341.wang.cherrie.contact.async.GetSenResponse;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -40,17 +45,35 @@ public class SearchActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // save string from EditText
-                stateToSearch = searchQuery.getText().toString();
-                makeHTTPrequest();
+                GetSenResponse response;
+
+                if (isConnected()) {
+                    // save string from EditText
+                    String repState = searchQuery.getText().toString();
+                    Log.i(TAG, getString(R.string.REPSTATE_LOG) + repState);
+                    response = new GetSenResponse(SearchActivity.this);
+                    response.execute(getString(R.string.SENSTATE_URL) + repState);
+                    emptyTextField();
+                }
+
             }
         });
 
     }
 
-    void makeHTTPrequest(){
-        Log.e(TAG, "making a request");
-        new GetMethodSearch().execute("http://www.whoismyrepresentative.com/getall_sens_bystate.php?state=ME&output=json");
+    private boolean isConnected() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private void emptyTextField(){
+        searchQuery.setText("");
     }
 
 }
