@@ -7,6 +7,11 @@
     <string name="email">Email</string>
     <string name="search">Search</string>
     <string name="goSearch">Go To Search</string>
+    <string name="find_out_more">Find out more</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="name">Name</string>
 
     <string name="action_settings">Settings</string>
     <string name="WHOISMYREP_TXT">Who is my Representative?</string>
