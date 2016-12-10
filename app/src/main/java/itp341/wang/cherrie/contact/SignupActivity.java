@@ -49,26 +49,22 @@ public class SignupActivity extends AppCompatActivity {
         passEditText = (EditText) findViewById(R.id.editTextPass);
         progressView = (CircularProgressView) findViewById(R.id.progress_view);
 
-        //((ContactApplication) this.getApplication()).setMyUser(new User());
-        //myUser = ((ContactApplication) this.getApplication()).getMyUser();
+        ((ContactApplication) this.getApplication()).setMyUser(new User());
+        myUser = ((ContactApplication) this.getApplication()).getMyUser();
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                Log.e("AUTH", "Here 1");
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null && myUser != null && myUser.getUsername() != null) {
-                    Debug.printToast("User is not null", getApplicationContext());
-                    Debug.printToast("Signup Successful", getApplicationContext());
-
-                    Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
-                    startActivityForResult(searchIntent, 0);
-
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference();
-                    myRef.child("users").child(myUser.getUsername()).setValue(myUser);
+                if (user != null) {
+                    // User is signed in
+                    Log.d("Auth Listener", "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d("Auth Listener", "onAuthStateChanged:signed_out");
                 }
+                // ...
             }
         };
     }
@@ -88,11 +84,14 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void signUp() {
+
         mAuth.createUserWithEmailAndPassword(myUser.getUsername(), passEditText.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(SignupActivity.this, "Signed up: " + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, "Signed up: " + task.isSuccessful(),
+                                Toast.LENGTH_SHORT).show();
+
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
@@ -101,6 +100,8 @@ public class SignupActivity extends AppCompatActivity {
                             progressView.stopAnimation();
                             progressView.setVisibility(View.GONE);
                         }
+
+                        // ...
                     }
                 });
     }
@@ -129,6 +130,21 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//                    // User is signed in
+//                    Log.d("Auth Listener", "onAuthStateChanged:signed_in:" + user.getUid());
+//                } else {
+//                    // User is signed out
+//                    Log.d("Auth Listener", "onAuthStateChanged:signed_out");
+//                }
+//                // ...
+//            }
+//        };
     }
 
     private boolean hasEmptyFields(){
