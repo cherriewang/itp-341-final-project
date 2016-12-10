@@ -22,6 +22,7 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+        getSupportActionBar().hide();
 
         Intent intent = getIntent();
         HashMap<String, ArrayList<Senator>> repMap =
