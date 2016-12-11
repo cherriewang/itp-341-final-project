@@ -10,10 +10,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import itp341.wang.cherrie.contact.R;
+import itp341.wang.cherrie.contact.model.Senator;
 
 public class OneFragment extends Fragment{
+
+    private Senator fragSenator1;
+    private TextView phoneNumber;
 
     public OneFragment() {
         // Required empty public constructor
@@ -27,8 +32,16 @@ public class OneFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_one, container, false);
+
+        Bundle bundle = getArguments();
+        fragSenator1 = bundle.getParcelable("sen");
+        phoneNumber = (TextView) rootView.findViewById(R.id.phoneNum);
+
+        phoneNumber.setText(fragSenator1.getPhone().toString());
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_one, container, false);
+        return rootView;
+
     }
 
 }

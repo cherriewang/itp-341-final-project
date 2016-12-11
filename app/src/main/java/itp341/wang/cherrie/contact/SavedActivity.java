@@ -28,6 +28,7 @@ import itp341.wang.cherrie.contact.utils.ContactApplication;
 
 public class SavedActivity extends AppCompatActivity {
     public static final String EXTRA_SEN = "com.itp341.wang.cherrie.sen";
+    public static final String EXTRA_HIDE = "com.itp341.wang.cherrie.hide";
     private static final String TAG = Activity.class.getName();
     private ListView resultView;
     private SenatorAdapter adapter;
@@ -112,6 +113,7 @@ public class SavedActivity extends AppCompatActivity {
                     Log.e("ResultsActivity", "do we crash here");
                     // Start intent
                     Intent detailIntent = new Intent(getApplicationContext(), DetailActivity.class);
+                    detailIntent.putExtra(EXTRA_HIDE, true);
                     //detailIntent.putExtra(EXTRA_SENATOR, position);
                     detailIntent.putExtra(EXTRA_SEN, selectedSenator);
                     startActivityForResult(detailIntent,2);

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ import itp341.wang.cherrie.contact.tab_fragments.OneFragment;
 import itp341.wang.cherrie.contact.tab_fragments.ThreeFragment;
 import itp341.wang.cherrie.contact.tab_fragments.TwoFragment;
 import itp341.wang.cherrie.contact.utils.ContactApplication;
+import itp341.wang.cherrie.contact.utils.Debug;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -36,6 +38,8 @@ public class DetailActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Button saveButton;
+    private Boolean hideFavoritesButton;
+    private TextView senatorName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,12 @@ public class DetailActivity extends AppCompatActivity {
         //getSupportActionBar().hide();
 
         Intent i = getIntent();
-        mySenator = (Senator) i.getExtras().getParcelable(ResultsActivity.EXTRA_SENATOR);
+        hideFavoritesButton = i.getBooleanExtra(SavedActivity.EXTRA_HIDE, false);
+        if(hideFavoritesButton){
+            mySenator = (Senator) i.getExtras().getParcelable(SavedActivity.EXTRA_SEN);
+        } else {
+            mySenator = (Senator) i.getExtras().getParcelable(ResultsActivity.EXTRA_SENATOR);
+        }
         myUser = ((ContactApplication) this.getApplication()).getMyUser();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,6 +62,13 @@ public class DetailActivity extends AppCompatActivity {
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         saveButton = (Button) findViewById(R.id.buttonSave);
+        senatorName = (TextView) findViewById(R.id.senName);
+        senatorName.bringToFront();
+        senatorName.setText(mySenator.getName().toString());
+
+        if(hideFavoritesButton){
+            saveButton.setVisibility(View.INVISIBLE);
+        }
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -75,16 +91,27 @@ public class DetailActivity extends AppCompatActivity {
                 myUser.appendSenator(mySenator);
                 myRef.child("users").child(myUser.getmNormalizedEmail()).setValue(myUser);
                 ((ContactApplication) getApplication()).setMyUser(myUser);
+                Debug.printToast("You have just saved "+name+" to your Favorites!", getApplicationContext());
 
             }
         });
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        OneFragment oneFragment = new OneFragment();
+        TwoFragment twoFragment = new TwoFragment();
+        ThreeFragment threeFragment = new ThreeFragment();
+
+        Bundle args = new Bundle();
+        args.putParcelable("sen", mySenator);
+        oneFragment.setArguments(args);
+        twoFragment.setArguments(args);
+        threeFragment.setArguments(args);
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "ONE");
-        adapter.addFragment(new TwoFragment(), "TWO");
-        adapter.addFragment(new ThreeFragment(), "THREE");
+        adapter.addFragment(oneFragment, "ONE");
+        adapter.addFragment(twoFragment, "TWO");
+        adapter.addFragment(threeFragment, "THREE");
         viewPager.setAdapter(adapter);
     }
 
