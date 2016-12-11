@@ -72,7 +72,7 @@ public class ResultsActivity extends AppCompatActivity {
 
             // Populate the data into the template view using the data object
             senName.setText(sen.getName());
-            senState.setText("State: "+sen.getState());
+            senState.setText(sen.getDistrict());
 
             moreButton.setTag(position);
 

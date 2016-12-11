@@ -1,5 +1,9 @@
 package itp341.wang.cherrie.contact.model;
 
+import android.util.Log;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -11,7 +15,12 @@ public class User {
     private String mNormalizedEmail;
     private String password;
     private HashMap<String, Senator> mSavedSenators;
+    private HashMap<String, ArrayList<Senator>> mSavedFormatted;
+    private ArrayList<Senator> list;
 
+    // CONSTRUCTOR
+    public User() {
+    }
 
     public String getUsername() {
         return username;
@@ -21,6 +30,15 @@ public class User {
         return mNormalizedEmail;
     }
 
+    public HashMap<String, ArrayList<Senator>> getmSavedFormatted() {
+        if (mSavedFormatted == null) {
+            mSavedFormatted = new HashMap<>();
+        }
+
+        mSavedFormatted.put("results", list);
+
+        return mSavedFormatted;
+    }
 
     public HashMap<String, Senator> getmSavedSenators() {
         return mSavedSenators;
@@ -34,13 +52,21 @@ public class User {
         if (mSavedSenators == null) {
             mSavedSenators = new HashMap<>();
         }
-
+        if(list == null){
+            list = new ArrayList<Senator>();
+        }
         mSavedSenators.put(s.getName(), s);
+        Log.e("USER","adding senator to list: "+s.getName());
+        list.add(s);
     }
 
     public void setUsername(String username) {
         this.username = username;
         this.mNormalizedEmail = username.replace(".", "%2E");
+    }
+
+    public ArrayList<Senator> getList() {
+        return list;
     }
 
     public String getPassword() {

@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:inputType="textPersonName"
-            android:text="Search by state"
+            android:textColorHint="@color/colorGrey"
+            android:hint="Search by state"
             android:textColor="@color/colorGrey"
             android:ems="10"
             android:id="@+id/editTextSearch" />
