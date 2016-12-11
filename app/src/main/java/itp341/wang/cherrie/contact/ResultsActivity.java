@@ -82,12 +82,13 @@ public class ResultsActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     int position = (Integer) view.getTag();
                     // Access the row position here to get the correct data item
-                    Senator selectedMovie = getItem(position);
+                    Senator selectedSenator = getItem(position);
 
                     Log.e("ResultsActivity", "do we crash here");
                     // Start intent
                     Intent detailIntent = new Intent(getApplicationContext(), DetailActivity.class);
-                    detailIntent.putExtra(EXTRA_SENATOR, position);
+                    //detailIntent.putExtra(EXTRA_SENATOR, position);
+                    detailIntent.putExtra(EXTRA_SENATOR, selectedSenator);
                     startActivityForResult(detailIntent,2);
                 }
             });

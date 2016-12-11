@@ -1,6 +1,9 @@
 package itp341.wang.cherrie.contact.model;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by Cherrie on 12/10/16.
  */

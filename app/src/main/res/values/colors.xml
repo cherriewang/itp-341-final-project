@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorGrey">#d1d2d3</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+
 </resources>

@@ -52,4 +52,7 @@
     <string name="SENBYSTATE_TXT">Search by state</string>
     <string name="SENNAME_URL"><![CDATA[http://whoismyrepresentative.com/getall_sens_byname.php?output=json&name=]]></string>
     <string name="SENSTATE_URL"><![CDATA[http://whoismyrepresentative.com/getall_sens_bystate.php?output=json&state=]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
