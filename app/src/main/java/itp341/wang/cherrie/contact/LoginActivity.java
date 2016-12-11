@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                Debug.printToast("Are we here?", getApplicationContext());
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
 
@@ -89,11 +90,21 @@ public class LoginActivity extends AppCompatActivity {
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Verify login information
 
-                // Start intent
-                Intent savedIntent = new Intent(getApplicationContext(), SavedActivity.class);
-                startActivityForResult(savedIntent, 0);
+                if(!hasEmptyFields()) {
+                    // Sign in
+
+                    progressView.startAnimation();
+                    progressView.setVisibility(View.VISIBLE);
+                    signIn();
+
+                } else{
+                    // print debug toast
+                    Debug.printToast("Please fill out all input fields!", getApplicationContext());
+                    progressView.stopAnimation();
+                    progressView.setVisibility(View.GONE);
+                }
+
             }
         });
     }

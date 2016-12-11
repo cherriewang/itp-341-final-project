@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 public class User {
     private String username;
+    private String mNormalizedEmail;
     private String password;
     private HashMap<String, Senator> mSavedSenators;
 
@@ -15,6 +16,11 @@ public class User {
     public String getUsername() {
         return username;
     }
+
+    public String getmNormalizedEmail() {
+        return mNormalizedEmail;
+    }
+
 
     public HashMap<String, Senator> getmSavedSenators() {
         return mSavedSenators;
@@ -34,6 +40,7 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+        this.mNormalizedEmail = username.replace(".", "%2E");
     }
 
     public String getPassword() {

@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -52,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
         usernameEditText = (EditText) findViewById(R.id.editTextEmail);
         passEditText = (EditText) findViewById(R.id.editTextPass);
         progressView = (CircularProgressView) findViewById(R.id.progress_view);
+        FirebaseAuth.getInstance().signOut();
 
         ((ContactApplication) this.getApplication()).setMyUser(new User());
         myUser = ((ContactApplication) this.getApplication()).getMyUser();
@@ -61,29 +63,19 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+                if (user != null && myUser != null && myUser.getmNormalizedEmail() != null) {
                     // User is signed in
                     Log.d("Auth Listener", "onAuthStateChanged:signed_in:" + user.getUid());
 
-                    FirebaseDatabase.getInstance().getReference().child("users").child(user.getEmail().replace(".", "%2E")).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // Get user information
-                            myUser = dataSnapshot.getValue(User.class);
-                            ((ContactApplication) getApplication()).setMyUser(myUser);
-                            // Intent to SearchActivity
-                            progressView.stopAnimation();
-                            progressView.setVisibility(View.GONE);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference();
+                    myRef.child("users").child(myUser.getmNormalizedEmail()).setValue(myUser);
 
-                            Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
-                            startActivityForResult(searchIntent, 0);
-                        }
+                    progressView.stopAnimation();
+                    progressView.setVisibility(View.GONE);
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        }
-                    });
-
+                    Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+                    startActivityForResult(searchIntent, 0);
 
 
                 } else {
@@ -93,6 +85,30 @@ public class SignupActivity extends AppCompatActivity {
                 // ...
             }
         };
+    }
+
+    private void listeners(){
+        // Listener to signup
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!hasEmptyFields()) {
+                    // Add signup to database
+                    myUser.setUsername(usernameEditText.getText().toString());
+                    myUser.setPassword(passEditText.getText().toString());
+                    progressView.startAnimation();
+                    progressView.setVisibility(View.VISIBLE);
+                    signUp();
+
+
+                } else{
+                    // print debug toast
+                    Debug.printToast("Please fill out all input fields!", getApplicationContext());
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -131,29 +147,6 @@ public class SignupActivity extends AppCompatActivity {
                 });
     }
 
-    private void listeners(){
-        // Listener to signup
-        enterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!hasEmptyFields()) {
-                    // Add signup to database
-                    myUser.setUsername(usernameEditText.getText().toString());
-                    myUser.setPassword(passEditText.getText().toString());
-                    progressView.startAnimation();
-                    progressView.setVisibility(View.VISIBLE);
-                    signUp();
-
-
-                } else{
-                    // print debug toast
-                    Debug.printToast("Please fill out all input fields!", getApplicationContext());
-                }
-            }
-        });
-
-
-    }
 
     private boolean hasEmptyFields(){
         if(usernameEditText.getText().toString().isEmpty() || passEditText.getText().toString().isEmpty()){
