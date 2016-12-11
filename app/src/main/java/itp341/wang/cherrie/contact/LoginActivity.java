@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                Debug.printToast("Are we here?", getApplicationContext());
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
 
@@ -129,7 +128,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
     private boolean hasEmptyFields(){
         if(usernameEditText.getText().toString().isEmpty() || passEditText.getText().toString().isEmpty()){
             progressView.stopAnimation();
