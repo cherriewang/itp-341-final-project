@@ -13,7 +13,7 @@ public class SavedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         goToSearchButton = (Button) findViewById(R.id.buttonSearch);
         listeners();
     }

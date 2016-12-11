@@ -1,5 +1,6 @@
 package itp341.wang.cherrie.contact;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import itp341.wang.cherrie.contact.model.User;
 import itp341.wang.cherrie.contact.utils.ContactApplication;
@@ -36,7 +41,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         initialize();
         listeners();
@@ -59,6 +64,28 @@ public class SignupActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d("Auth Listener", "onAuthStateChanged:signed_in:" + user.getUid());
+
+                    FirebaseDatabase.getInstance().getReference().child("users").child(user.getEmail().replace(".", "%2E")).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            // Get user information
+                            myUser = dataSnapshot.getValue(User.class);
+                            ((ContactApplication) getApplication()).setMyUser(myUser);
+                            // Intent to SearchActivity
+                            progressView.stopAnimation();
+                            progressView.setVisibility(View.GONE);
+
+                            Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+                            startActivityForResult(searchIntent, 0);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+
+
+
                 } else {
                     // User is signed out
                     Log.d("Auth Listener", "onAuthStateChanged:signed_out");
@@ -100,7 +127,6 @@ public class SignupActivity extends AppCompatActivity {
                             progressView.setVisibility(View.GONE);
                         }
 
-                        // ...
                     }
                 });
     }
@@ -118,11 +144,7 @@ public class SignupActivity extends AppCompatActivity {
                     progressView.setVisibility(View.VISIBLE);
                     signUp();
 
-//                    // Start intent
-//                    progressView.startAnimation();
-//                    progressView.setVisibility(View.VISIBLE);
-//                    Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
-//                    startActivityForResult(searchIntent, 0);
+
                 } else{
                     // print debug toast
                     Debug.printToast("Please fill out all input fields!", getApplicationContext());
