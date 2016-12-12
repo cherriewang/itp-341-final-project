@@ -10,7 +10,10 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,10 +26,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:text="Address"
             android:textSize="20dp"
             android:id="@+id/officeLoc"
             android:layout_centerInParent="true"/>
+
+        <Button
+            android:text="Open in Maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:id="@+id/buttonMaps"
+            android:background="@drawable/button"
+            style="@style/buttonStyle"/>
     </LinearLayout>
 
 </RelativeLayout>

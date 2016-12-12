@@ -18,7 +18,7 @@ public class TwoFragment extends Fragment {
 
     private Senator fragSenator2;
     private TextView website;
-    private TextView email;
+    private TextView partyAffiliation;
 
     public TwoFragment(){
 
@@ -37,11 +37,28 @@ public class TwoFragment extends Fragment {
         Bundle bundle = getArguments();
         fragSenator2 = bundle.getParcelable("sen");
         website = (TextView) rootView.findViewById(R.id.website_tv);
-        email = (TextView) rootView.findViewById(R.id.email_tv);
+        partyAffiliation = (TextView) rootView.findViewById(R.id.email_tv);
 
         website.setText(fragSenator2.getLink().toString());
+        partyAffiliation.setText(fullPartyForm(fragSenator2.getParty()));
         Linkify.addLinks(website, Linkify.ALL);
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    public String fullPartyForm(String abbrev){
+
+        if(abbrev.equals("D")){
+            return "Democratic Party";
+        }
+        if(abbrev.equals("R")){
+            return "Republican Party";
+        }
+        if(abbrev.equals("I")){
+            return "Independent";
+        } else{
+            return "No listed Party Affiliation";
+        }
+
     }
 }

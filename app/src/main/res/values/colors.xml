@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorGrey">#d1d2d3</color>
+    <color name="colorYellow">#ffd800</color>
+    <color name="colorSlightlyDarkerYellow">#f2c500</color>
+    <color name="colorVibrantRed">#e52d00</color>
+    <color name="colorDarkRed">#af1700</color>
     <color name="white">#FFFFFF</color>
 
     <color name="textColorPrimary">#FFFFFF</color>

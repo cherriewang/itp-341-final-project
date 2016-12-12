@@ -55,6 +55,7 @@ public class DetailActivity extends AppCompatActivity {
             mySenator = (Senator) i.getExtras().getParcelable(ResultsActivity.EXTRA_SENATOR);
         }
         myUser = ((ContactApplication) this.getApplication()).getMyUser();
+        this.setTitle(mySenator.getName());
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
