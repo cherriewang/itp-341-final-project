@@ -30,6 +30,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button enterButton;
     private EditText usernameEditText;
     private EditText passEditText;
+    private EditText passEditTextAgain;
     private User myUser;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -52,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
         enterButton = (Button) findViewById(R.id.buttonEnter);
         usernameEditText = (EditText) findViewById(R.id.editTextEmail);
         passEditText = (EditText) findViewById(R.id.editTextPass);
+        passEditTextAgain = (EditText)findViewById(R.id.editTextPassAgain);
         progressView = (CircularProgressView) findViewById(R.id.progress_view);
         FirebaseAuth.getInstance().signOut();
 
@@ -92,7 +94,7 @@ public class SignupActivity extends AppCompatActivity {
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!hasEmptyFields()) {
+                if(!hasEmptyFields() && passwordMatches()) {
                     // Add signup to database
                     myUser.setUsername(usernameEditText.getText().toString());
                     myUser.setPassword(passEditText.getText().toString());
@@ -101,9 +103,6 @@ public class SignupActivity extends AppCompatActivity {
                     signUp();
 
 
-                } else{
-                    // print debug toast
-                    Debug.printToast("Please fill out all input fields!", getApplicationContext());
                 }
             }
         });
@@ -152,9 +151,25 @@ public class SignupActivity extends AppCompatActivity {
         if(usernameEditText.getText().toString().isEmpty() || passEditText.getText().toString().isEmpty()){
             progressView.stopAnimation();
             progressView.setVisibility(View.GONE);
+            Debug.printToast("Please fill out all input fields!", getApplicationContext());
             return true;
         } else {
             return false;
         }
     }
+
+    private boolean passwordMatches(){
+        if(passEditText.getText().toString().equals(passEditTextAgain.getText().toString())){
+            // they match
+            return true;
+        } else {
+            progressView.stopAnimation();
+            progressView.setVisibility(View.GONE);
+            Debug.printToast("Passwords do not match", getApplicationContext());
+            passEditText.setText("");
+            passEditTextAgain.setText("");
+            return false;
+        }
+    }
+
 }
