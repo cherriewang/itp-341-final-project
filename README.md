@@ -3,10 +3,10 @@ An Android application developed to allow consituents to easily and quickly look
 
 Currently only allows for search by state of Senators, but looking to include Representatives and more broad search options in the future.
 
-![alt tag](http://imgur.com/a/7Fgw4)
-![alt tag](http://imgur.com/a/LdtzF)
-![alt tag](http://imgur.com/a/mMXW9)
+![alt tag](http://i.imgur.com/kidJz7p.jpg)
+![alt tag](http://i.imgur.com/w6BRDTX.jpg)
+![alt tag](http://i.imgur.com/YjHbxfy.jpg)
 
-Elected official information from <http://whoismyrepresentative.com/api>
-User login/sign up handled via Firebase
+- Elected official information from <http://whoismyrepresentative.com/api>
+- User login/sign up handled via Firebase
 
