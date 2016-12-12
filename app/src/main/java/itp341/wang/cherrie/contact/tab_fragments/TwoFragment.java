@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class TwoFragment extends Fragment {
         email = (TextView) rootView.findViewById(R.id.email_tv);
 
         website.setText(fragSenator2.getLink().toString());
+        Linkify.addLinks(website, Linkify.ALL);
         // Inflate the layout for this fragment
         return rootView;
     }

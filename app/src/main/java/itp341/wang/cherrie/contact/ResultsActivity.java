@@ -26,6 +26,7 @@ public class ResultsActivity extends AppCompatActivity {
     private static final String TAG = Activity.class.getName();
     ListView resultView;
     SenatorAdapter adapter;
+    Button savedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class ResultsActivity extends AppCompatActivity {
                 (HashMap<String, ArrayList<Senator>> ) intent.getSerializableExtra("map");
 
         resultView = (ListView) findViewById(R.id.result_lv);
+        savedButton = (Button) findViewById(R.id.buttonSaved);
 
 //        ArrayAdapter<Senator> arrayAdapter = new ArrayAdapter<>(
 //                this,
@@ -49,7 +51,19 @@ public class ResultsActivity extends AppCompatActivity {
         adapter = new SenatorAdapter(this, repMap.get("results"));
         resultView.setAdapter(adapter);
 
+        listeners();
+    }
 
+    private void listeners(){
+        // Listener to login
+       savedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Start intent
+                Intent savedIntent = new Intent(getApplicationContext(), SavedActivity.class);
+                startActivityForResult(savedIntent, 0);
+            }
+        });
     }
 
     private class SenatorAdapter extends ArrayAdapter<Senator> {

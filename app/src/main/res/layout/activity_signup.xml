@@ -58,6 +58,8 @@
             android:layout_gravity="center"
             android:gravity ="center"
             android:layout_marginTop="32dp"
-            android:id="@+id/buttonEnter" />
+            android:id="@+id/buttonEnter"
+            android:background="@drawable/button"
+            style="@style/buttonStyle"/>
     </LinearLayout>
 </RelativeLayout>

@@ -54,7 +54,10 @@
             android:text="Save to Favorites"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonSave"/>
+            android:id="@+id/buttonSave"
+            android:background="@drawable/button"
+            style="@style/buttonStyle"
+            android:layout_marginBottom="6dp"/>
 
     </RelativeLayout>
 
