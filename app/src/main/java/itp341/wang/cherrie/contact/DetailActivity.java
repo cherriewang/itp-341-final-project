@@ -108,9 +108,9 @@ public class DetailActivity extends AppCompatActivity {
         threeFragment.setArguments(args);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(oneFragment, "ONE");
-        adapter.addFragment(twoFragment, "TWO");
-        adapter.addFragment(threeFragment, "THREE");
+        adapter.addFragment(oneFragment, "CALL");
+        adapter.addFragment(twoFragment, "SITE");
+        adapter.addFragment(threeFragment, "LOCATION");
         viewPager.setAdapter(adapter);
     }
 
