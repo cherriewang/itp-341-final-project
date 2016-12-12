@@ -136,7 +136,7 @@ public class SignupActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(SignupActivity.this, "Sign up unsuccessful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "Sign up unsuccessful. Make sure your password is of adequate length and complexity.", Toast.LENGTH_SHORT).show();
                             progressView.stopAnimation();
                             progressView.setVisibility(View.GONE);
                         }
