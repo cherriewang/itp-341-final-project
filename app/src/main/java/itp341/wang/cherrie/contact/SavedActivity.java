@@ -41,18 +41,15 @@ public class SavedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved);
         myUser = ((ContactApplication) this.getApplication()).getMyUser();
-        Log.e("Is my User being stored", "Hello: "+myUser.getUsername());
-        // Create HashMap<String, ArrayList<Senator>>
+
+        initialize();
+        listeners();
+    }
+
+    public void initialize(){
         senList = new ArrayList<Senator>();
-
-        //getSupportActionBar().hide();
-
-
-        //HashMap<String, ArrayList<Senator>> repMap = myUser.getmSavedFormatted();
-
+        goToSearchButton = (Button) findViewById(R.id.buttonSearch);
         resultView = (ListView) findViewById(R.id.result_lv);
-        //adapter = new SenatorAdapter(this, repMap.get("results"));
-
 
         if (myUser.getmSavedSenators() != null) {
             convertSenList(myUser.getmSavedSenators());
@@ -60,9 +57,6 @@ public class SavedActivity extends AppCompatActivity {
             resultView.setAdapter(adapter);
         }
 
-
-        goToSearchButton = (Button) findViewById(R.id.buttonSearch);
-        listeners();
     }
 
     private void listeners(){

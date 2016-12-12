@@ -24,9 +24,10 @@ import itp341.wang.cherrie.contact.model.Senator;
 public class ResultsActivity extends AppCompatActivity {
     public static final String EXTRA_SENATOR = "com.itp341.wang.cherrie.senator";
     private static final String TAG = Activity.class.getName();
-    ListView resultView;
-    SenatorAdapter adapter;
-    Button savedButton;
+    private ListView resultView;
+    private SenatorAdapter adapter;
+    private Button savedButton;
+    private HashMap<String, ArrayList<Senator>> repMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +36,18 @@ public class ResultsActivity extends AppCompatActivity {
         //getSupportActionBar().hide();
 
         Intent intent = getIntent();
-        HashMap<String, ArrayList<Senator>> repMap =
-                (HashMap<String, ArrayList<Senator>> ) intent.getSerializableExtra("map");
+        repMap = (HashMap<String, ArrayList<Senator>> ) intent.getSerializableExtra("map");
 
+        initialize();
+        listeners();
+    }
+
+    private void initialize(){
         resultView = (ListView) findViewById(R.id.result_lv);
         savedButton = (Button) findViewById(R.id.buttonSaved);
 
-//        ArrayAdapter<Senator> arrayAdapter = new ArrayAdapter<>(
-//                this,
-//                android.R.layout.simple_list_item_1,
-//                repMap.get("results"));
-//
-//        resultView.setAdapter(arrayAdapter);
-
         adapter = new SenatorAdapter(this, repMap.get("results"));
         resultView.setAdapter(adapter);
-
-        listeners();
     }
 
     private void listeners(){

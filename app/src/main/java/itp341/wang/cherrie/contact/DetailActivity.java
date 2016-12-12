@@ -45,7 +45,6 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        //getSupportActionBar().hide();
 
         Intent i = getIntent();
         hideFavoritesButton = i.getBooleanExtra(SavedActivity.EXTRA_HIDE, false);
@@ -54,13 +53,12 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             mySenator = (Senator) i.getExtras().getParcelable(ResultsActivity.EXTRA_SENATOR);
         }
+
         myUser = ((ContactApplication) this.getApplication()).getMyUser();
         this.setTitle(mySenator.getName());
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         saveButton = (Button) findViewById(R.id.buttonSave);
         senatorName = (TextView) findViewById(R.id.senName);

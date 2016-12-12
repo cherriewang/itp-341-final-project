@@ -1,4 +1,4 @@
-package itp341.wang.cherrie.contact;
+package itp341.wang.cherrie.contact.async;
 
 import android.os.AsyncTask;
 import android.util.Log;
